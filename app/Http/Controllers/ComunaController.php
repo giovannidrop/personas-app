@@ -25,7 +25,10 @@ class ComunaController extends Controller
      */
     public function create()
     {
-        //
+        $municipio = DB::table('tb_municipio')
+        ->orderBy('muni_nomb')
+        ->get();
+        return view('comuna.new', ['municipio' =>$municipios]);
     }
 
     /**
@@ -33,7 +36,16 @@ class ComunaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $comuna =new Comuna();
+        $comuna->comu_nomb = $request->name;
+        $comuna->muni_codi = $request->code;
+        $comuna->save();
+
+        $comunas = DB::table('tb_comuna')
+        ->join('tb_municipio', 'tb_comuna.muni_codi', '=', 'tb_municipio.muni_codi')
+        ->select('tb_comuna.*', "tb_municipio.muni_nomb")
+        ->get();
+        return view('comuna.index', ['comunas' => $comunas]);
     }
 
     /**
