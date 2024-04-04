@@ -26,7 +26,11 @@ class DepartamentoController extends Controller
      */
     public function create()
     {
-        //
+        $departamentos = DB::table('tb_departamento')
+            ->orderBy('depa_nomb')
+            ->get();
+        
+        return view('departamento.new', ['departamentos' => $departamentos]);
     }
 
     /**
@@ -34,7 +38,10 @@ class DepartamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $departamentos = DB::table('tb_departamento')
+         ->get();
+    
+        return view('departamento.index', ['departamentos' => $departamentos]);
     }
 
     /**
