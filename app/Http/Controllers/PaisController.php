@@ -25,7 +25,11 @@ class PaisController extends Controller
      */
     public function create()
     {
-        //
+        $paises = DB::table('tb_pais')
+            ->orderBy('pais_nomb')
+            ->get();
+        
+        return view('pais.new', ['paises' => $paises]);
     }
 
     /**
@@ -33,7 +37,11 @@ class PaisController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $paises = DB::table('tb_pais')
+         ->orderBy('pais_nomb')
+         ->get();
+    
+        return view('pais.index', ['paises' => $paises]);
     }
 
     /**
